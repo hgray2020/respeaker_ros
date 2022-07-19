@@ -9,7 +9,6 @@ import usb.util
 import pyaudio
 import math
 import numpy as np
-import tf.transformations as T
 import os
 import rospy
 import struct
@@ -409,13 +408,13 @@ class RespeakerNode(object):
             msg = PoseStamped()
             msg.header.frame_id = self.sensor_frame_id
             msg.header.stamp = stamp
-            ori = T.quaternion_from_euler(math.radians(doa), 0, 0)
+            
             msg.pose.position.x = self.doa_xy_offset * np.cos(doa_rad)
             msg.pose.position.y = self.doa_xy_offset * np.sin(doa_rad)
-            msg.pose.orientation.w = ori[0]
-            msg.pose.orientation.x = ori[1]
-            msg.pose.orientation.y = ori[2]
-            msg.pose.orientation.z = ori[3]
+            msg.pose.orientation.w = 0
+            msg.pose.orientation.x = 0
+            msg.pose.orientation.y = 0
+            msg.pose.orientation.z = 0
             self.pub_doa.publish(msg)
 
         # speech audio
