@@ -17,6 +17,8 @@
   <depend>python3-pyaudio</depend>
   <depend>speech_recognition_msgs</depend>
   <depend>std_msgs</depend>
+  <depend>rospy</depend>
+  <depend>actionlib</depend>
   <export>
     <pip_requirements>requirements.txt</pip_requirements>
   </export>
