@@ -1,4 +1,4 @@
-#!/bin/bash/python3.8
+#!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
 # Author: furushchev <furushchev@jsk.imi.i.u-tokyo.ac.jp>
 
