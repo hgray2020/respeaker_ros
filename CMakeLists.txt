@@ -1,31 +1,43 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(respeaker_ros)
 
+cmake_minimum_required(VERSION 3.0.2)
+project(audio_filtering)
+
+
 find_package(catkin REQUIRED COMPONENTS
-  catkin_virtualenv
-  dynamic_reconfigure)
-if ($ENV{ROS_PYTHON_VERSION} EQUAL 2)
-  find_package(catkin_virtualenv REQUIRED)
-else()
-  message(WARNING "catkin_virtualenv does not currently support python3"
-    "you need to install python dependencies manually by running:\n"
-    "roscd respeaker_ros && pip install -r requirements.txt")
-endif()
+  roscpp
+  rospy
+  std_msgs
+)
 
-generate_dynamic_reconfigure_options(
-  cfg/Respeaker.cfg)
 
-catkin_package()
 
-if (catkin_virtualenv_FOUND)
-  catkin_generate_virtualenv()
-endif()
+catkin_package(
+#  INCLUDE_DIRS include
+#  LIBRARIES audio_filtering
+#  CATKIN_DEPENDS roscpp rospy std_msgs
+#  DEPENDS system_lib
+)
 
-catkin_install_python(
-  PROGRAMS
+include_directories(
+# include
+  ${catkin_INCLUDE_DIRS}
+)
+
+
+catkin_install_python(PROGRAMS
   scripts/respeaker_node.py
   scripts/speech_to_text.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+
+## Mark other files for installation (e.g. launch and bag files, etc.)
+install(FILES requirements.txt
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+
 
 install(DIRECTORY scripts launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
@@ -34,7 +46,3 @@ install(DIRECTORY scripts launch
 install(FILES requirements.txt
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
-if (CATKIN_ENABLE_TESTING)
-  catkin_add_nosetests(test/test_installed.py
-    DEPENDENCIES ${PROJECT_NAME}_generate_virtualenv)
-endif()
