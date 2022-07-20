@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-
 # Author: furushchev <furushchev@jsk.imi.i.u-tokyo.ac.jp>
 
+import sys
+
+print(sys.executable)
+
 import angles
 from contextlib import contextmanager
 import usb.core
@@ -12,7 +16,7 @@ import numpy as np
 import os
 import rospy
 import struct
-import sys
+# import sys
 import time
 from audio_common_msgs.msg import AudioData
 from geometry_msgs.msg import PoseStamped
