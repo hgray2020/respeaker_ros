@@ -18,7 +18,7 @@ generate_dynamic_reconfigure_options(
 catkin_package()
 
 if (catkin_virtualenv_FOUND)
-  catkin_generate_virtualenv(PYTHON_INTERPRETER python3)
+  catkin_generate_virtualenv()
 endif()
 
 catkin_install_python(
